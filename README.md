@@ -25,51 +25,27 @@
 # looks good I think (can probably delete danceability and energy tho)
 
 ### 7.
-## Started running the build_billboard_table.py file to make the csv for top 10 songs, but WAS TAKING WAY TOO LONG (10 seconds per week)
-## IS THERE A BETTER WAY TO EXTRACT FROM BILLBOARD.py??
-# > python build_billboard_table.py
+## After reviewing billboard.py, decided to use kaggle dataset instead: https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs
+# Download as zip file and move "charts.csv" into your directory
 
+### 8.
+## Cleaned artist and song data, and merged:
+# Remove punctuation, parenthesis
+# For artists: remove songs with multiple collaborators so it can match MSD (which only has one artist)
+# Merged and wrote to merged.csv
 
-### TODO
-## 1. Quick check on the billboard csv to make sure it looks good
-
-## 2. CLEAN NAMES???
-# EXAMPLE:
-<!-- import re
-
-def clean_string(s):
-    s = s.lower()
-    s = re.sub(r'\(.*?\)', '', s)
-    s = re.sub(r'[^a-z0-9 ]', '', s)
-    return s.strip()
-
-df_msd["clean_title"] = df_msd["title"].apply(clean_string)
-df_billboard["clean_title"] = df_billboard["title"].apply(clean_string) -->
-
-
-## 3. Merge DFs together
-# EXAMPLE:
-<!-- df_merged = pd.merge(
-    df_billboard,
-    df_msd,
-    left_on="clean_title",
-    right_on="clean_title",
-    how="inner"
-) -->
-
-
-## 4. Compute Weekly Averages (if have time before first meeting) and turn df into merged CSV
-# EXAMPLE:
-<!-- features = ["tempo", "loudness", "key", "mode"]
-
-df_weekly = (
-    df_merged
-    .groupby("week")[features]
-    .mean()
-    .reset_index()
-)
-
-# Save full merged df to csv
-df_weekly.to_csv("weekly_top10_centroids.csv", index=False) -->
-
-## 5. Examine for any obvious errors
+### 9. 
+## Compute Weekly Averages:
+# Since we have a small dataset, most weeks only have 1 or 2 songs. The full counts are here:
+| # Songs in week| # Weeks |
+|---|-------|
+| 1 | 771   |
+| 2 | 492   |
+| 3 | 250   |
+| 4 | 199   |
+| 5 | 93    |
+| 6 | 77    |
+| 7 | 31    |
+| 8 | 10    |
+# For analysis we may want to only use weeks that have a certain amount of songs
+# Overall, only 271 unique songs from the charts are found in the MSD subset, so figure out alternate data sources if necessary 

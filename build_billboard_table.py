@@ -1,35 +1,64 @@
-import billboard
 import pandas as pd
-from datetime import datetime, timedelta
 
-start_date = datetime(2010, 1, 2)  ## Must be on a Saturday
-end_date = datetime(2000, 1, 1)
+# Read in CSVs
+df_msd = pd.read_csv("msd_subset_metadata.csv", sep=",") 
+df_billboard = pd.read_csv("charts.csv", sep=',')
 
-rows = []
-current_date = start_date
+# Clean song data
+def clean_song(s: pd.Series) -> pd.Series:
+    return (s.str.lower()
+             .str.replace(r'\(.*?\)', '', regex=True)
+             .str.replace(r'[^a-z0-9 ]', '', regex=True)
+             .str.strip())
 
-while current_date >= end_date:
-    try:
-        chart = billboard.ChartData('hot-100', date=current_date.strftime("%Y-%m-%d"))
+# Clean artist data (some features weren't matching)
+def clean_artist(s: pd.Series) -> pd.Series:
+    return (s.str.lower()
+             .str.replace(r'\(.*?\)', '', regex=True)
+             .str.replace(r'featuring.*', '', regex=True)
+             .str.replace(r' ft\..*', '', regex=True)
+             .str.replace(r' x .*', '', regex=True)
+             .str.split('&').str[0]
+             .str.replace(r'[^a-z0-9 ]', '', regex=True)
+             .str.strip())
 
-        for entry in chart[:10]:
-            rows.append({
-                "week": chart.date,
-                "rank": entry.rank,
-                "title": entry.title,
-                "artist": entry.artist
-            })
+# Clean
+df_billboard["clean_song"]   = clean_song(df_billboard["song"])
+df_msd["clean_title"]  = clean_song(df_msd["title"])
 
-        print(f"Processed week: {chart.date}")
+df_billboard["clean_artist"] = clean_artist(df_billboard["artist"])
+df_msd["clean_artist"]       = clean_artist(df_msd["artist_name"])
 
-        ## Move back one week
-        current_date -= timedelta(weeks=1)
+# Merge
+df_merged = df_billboard.merge(
+    df_msd,
+    left_on=["clean_song", "clean_artist"],
+    right_on=["clean_title", "clean_artist"],
+    how="inner"
+)
 
-    except Exception as e:
-        print(f"Error on {current_date}: {e}")
-        current_date -= timedelta(weeks=1)
+# Stats
+print(f"Billboard rows: {len(df_billboard)}")
+print(f"Matched rows:   {len(df_merged)}")
+print(f"Unmatched:      {len(df_billboard) - len(df_merged)}")
+print(f"Unique songs:   {df_merged['song'].nunique()}")
 
-df_billboard = pd.DataFrame(rows)
-df_billboard.to_csv("billboard_top10.csv", index=False)
+# Write merged CSV
+df_merged.to_csv("merged.csv", index=False)
 
-print("Done. Total rows:", len(df_billboard))
+features = ["tempo", "loudness", "key", "mode"]
+
+# Group by week
+df_weekly = (
+    df_merged
+    .groupby("date")
+    .agg(
+        {f: "mean" for f in features} | {"track_id": "count"}
+    )
+    .rename(columns={"track_id": "count"})
+    .reset_index()
+)
+df_weekly = df_weekly.sort_values(by=["count"])
+print(df_weekly)
+print(df_weekly['count'].value_counts())
+df_weekly.to_csv("weekly_top10_centroids.csv", index=False)
