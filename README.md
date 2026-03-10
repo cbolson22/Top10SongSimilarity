@@ -5,7 +5,7 @@
 ## Added a venv and installed dependencies
 # > python3 -m venv venv
 # > source venv/bin/activate
-# > pip install pandas numpy h5py billboard.py
+# > pip install pandas numpy h5py matplotlib seaborn
 
 ### 3.
 ## Ran the inspect_h5.py file to see how the .h5 files are structures
