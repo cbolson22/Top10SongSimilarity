@@ -1,5 +1,19 @@
+## virtual environments
 venv/
+venv310/
+venv310/*
+
+## MSD
 MillionSongSubset/
 MillionSongSubset/charts.csv
-charts.csv
-merged.csv
+MSD_test_files/MillionSongSubset/
+
+## mp3 files
+song_mp3/
+
+## DS Store
+.DS_Store
+
+## msaf analysis
+estimations/
+.features_msaf_tmp.json
