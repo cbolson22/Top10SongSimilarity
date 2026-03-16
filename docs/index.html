@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How Popular Music Has Changed Over Time</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        h1 { text-align: center; }
+        img { max-width: 70%; margin: 20px 0; }
+        .section { margin-bottom: 50px; }
+    </style>
+</head>
+<body>
+
+<h1>How Popular Music Has Changed Over Time</h1>
+
+<p><strong>Annabelle Sole - annabellesole2026@u.northwestern.edu</strong><br>
+<strong>Connor Olson - connorolson2026@u.northwestern.edu</strong><br>
+CS 352 – Machine Perception of Music & Audio<br>
+Northwestern University<br>
+Bryan Pardo</p>
+
+<hr>
+
+<div class="section">
+<h2>*STILL TODO*</h2>
+<ul>
+    <li>Add paragraphs about overall project (why and how we did it)</li>
+    <li>Organize Website to make it easier to see all comparison plots</li>
+    <li>Find some research or findings online that agree with or contrast with our findings to add more context and depth to the analysis</li>
+    <li>Use the trends to predict which songs in the 2020s will be hits based on their features, and see if we can find any early data to support or go against those predictions</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Project Overview</h2>
+<p>
+This project analyzes how popular music has evolved across decades by examining
+both acoustic features and structural complexity of top songs from the 1950s to the 2010s.
+We extracted low-level audio features using Librosa and structural segmentation using <a href="https://github.com/urinieto/msaf">MSAF</a>.
+We then averaged features by decade to study long-term trends.
+</p>
+</div>
+
+<div class="section">
+<h2>Average Tempo</h2>
+<p>
+Tempo increased from the 1950s to a peak in the 1980s, then stabilized in modern decades.
+This challenges the assumption that modern hits are simply faster.
+</p>
+<img src="plots/tempo_trend.png">
+</div>
+
+<div class="section">
+<h2>Energy</h2>
+<p>
+We observe a dramatic increase in RMS energy over time, especially from the 1990s onward,
+consistent with the “loudness war” phenomenon in modern production.
+</p>
+<img src="plots/energy_trend.png">
+</div>
+
+<div class="section">
+<h2>Label Entropy</h2>
+<p>
+Using MSAF, we measured structural entropy across decades. 
+Results suggest modern songs may be slightly more structurally repetitive than earlier decades.
+</p>
+<img src="plots/label_entropy_trend.png">
+</div>
+
+<div class="section">
+<h2>Number of Segments</h2>
+<p>
+The number of segments per song has fluctuated over time, reflecting changes in 
+song structure and complexity as production techniques evolved.
+</p>
+<img src="plots/num_segments_trend.png">
+</div>
+
+<div class="section">
+<h2>Structural Ratio</h2>
+<p>
+The ratio of structured sections to total segments shows how much of a song is 
+composed of repeating parts, highlighting trends in musical predictability.
+</p>
+<img src="plots/structure_ratio_trend.png">
+</div>
+
+<div class="section">
+<h2>Average Duration</h2>
+<p>
+Song length expanded through the CD era, peaked in the 1990s, declined with the
+rise of streaming, and partially rebounded in the 2010s.
+</p>
+<img src="plots/duration_trend.png">
+</div>
+
+<div class="section">
+<h2>Average Chroma Mean</h2>
+<p>
+Average chroma values reflect the harmonic intensity of popular music. The trend
+suggests a cyclical pattern over time, with tonal richness rising up to the 1980s,
+dipping in the 1990s, and increasing again in the 2000s and 2010s.
+</p>
+<img src="plots/chroma_mean_trend.png">
+</div>
+
+
+<div class="section">
+<h2>Audio Tracks Analyzed</h2>
+<h3>1950s</h3>
+<ul>
+<li>Chantilly Lace – Big Bopper</li>
+<li>It's All In The Game – Tommy Edwards</li>
+<li>A Lover's Question – Clyde McPhatter</li>
+<li>To Know Him, Is To Love Him – The Teddy Bears</li>
+<li>Mack The Knife – Bobby Darin</li>
+</ul>
+<h3>1960s</h3>
+<ul>
+<li>The Twist – Chubby Checker</li>
+<li>Wipe Out – The Surfaris</li>
+<li>He'll Have To Go – Jim Reeves</li>
+<li>Hello, Dolly! – Louis Armstrong And The All Stars</li>
+<li>Tossin' And Turnin' – Bobby Lewis</li>
+</ul>
+<h3>1970s</h3>
+<ul>
+<li>How Deep Is Your Love – Bee Gees</li>
+<li>I Go Crazy – Paul Davis</li>
+<li>I Just Want To Be Your Everything – Andy Gibb</li>
+<li>Why Me – Kris Kristofferson</li>
+<li>(Love Is) Thicker Than Water – Andy Gibb</li>
+</ul>
+<h3>1980s</h3>
+<ul>
+<li>Gloria – Laura Branigan</li>
+<li>Jessie's Girl – Rick Springfield</li>
+<li>Another One Bites The Dust – Queen</li>
+<li>Hurts So Good – John Cougar</li>
+<li>Red Red Wine – UB40</li>
+</ul>
+<h3>1990s</h3>
+<ul>
+<li>How Do I Live – LeAnn Rimes</li>
+<li>Foolish Games/You Were Meant For Me – Jewel</li>
+<li>Truly Madly Deeply – Savage Garden</li>
+<li>Too Close – Next</li>
+<li>Macarena (Bayside Boys Mix) – Los Del Rio</li>
+</ul>
+<h3>2000s</h3>
+<ul>
+<li>I'm Yours – Jason Mraz</li>
+<li>Before He Cheats – Carrie Underwood</li>
+<li>Hanging By A Moment – Lifehouse</li>
+<li>You And Me – Lifehouse</li>
+<li>Unwell – matchbox twenty</li>
+</ul>
+<h3>2010s</h3>
+<ul>
+<li>Radioactive – Imagine Dragons</li>
+<li>Party Rock Anthem – LMFAO Featuring Lauren Bennett & GoonRock</li>
+<li>Shape Of You – Ed Sheeran</li>
+<li>Counting Stars – OneRepublic</li>
+<li>Uptown Funk! – Mark Ronson Featuring Bruno Mars</li>
+</ul>
+</div>
+
+</body>
+</html>
