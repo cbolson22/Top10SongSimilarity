@@ -46,3 +46,8 @@ The project relies on Jupyter notebooks for the analysis pipeline:
 
 ## Methodology Note
 This analysis uses a combination of the Billboard Hot 100 historical dataset (via Kaggle) and local MP3 samples downloaded from YouTube.
+
+## Contact Us!
+Annabelle Sole - annabellesole2026@u.northwestern.edu
+
+Connor Olson - connorolson2026@u.northwestern.edu
