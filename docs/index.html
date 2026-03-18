@@ -37,6 +37,7 @@ and how production techniques shape listener preferences.
 
 <p>
 At a high level, we analyzed the top twenty songs from each decade between the 1950s and 2010s using audio signal processing techniques.
+To find these top twenty songs we used the "Billboard Hot 100" historical dataset available on <a href="https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs">Kaggle</a>, and then downloaded local MP3 samples of each song from YouTube for analysis.
 We extracted low-level acoustic features such as tempo and energy (loudness) using Librosa. We also performed structural segmentation using
 <a href="https://github.com/urinieto/msaf">MSAF</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
 By aggregating these features by decade, we were able to compare long-term trends in popular music.
