@@ -1,51 +1,48 @@
-### 1.
-## Made this directory and added in the MillionSongSubset
+# Top 10 Song Similarity Analysis
 
-### 2.
-## Added a venv and installed dependencies
-# > python3 -m venv venv
-# > source venv/bin/activate
-# > pip install -r requirements.txt
+[**View the Project Website**](https://cbolson22.github.io/Top10SongSimilarity/)
 
-### 3.
-## Ran the inspect_h5.py file to see how the .h5 files are structures
-# > python inspect_h5.py
+## Purpose
+This project investigates the evolution of popular music by analyzing the similarity of Billboard Top Charts hits across seven decades (1950s–2010s). By extracting and comparing audio features such as tempo, energy, and structural complexity, we aim to uncover trends that define how "pop" music has changed over time.
 
-### 4.
-## Ran the extract_one.py file to see the values of a .h5 file print out correctly
-# > python extract_one.py
+---
 
-### 5.
-## Ran the build_subset_table.py file to build the csv with basic info for now (can expand the fields we want to include too)
-# > python build_subset_table.py
+## Repository Contents
 
-### 6.
-## Ran the inspect_subset.py file to print out some basic things about the csv to check it\
-# > python inspect_subset.py
-# looks good I think (can probably delete danceability and energy tho)
+- **`analysis_pipeline_example.ipynb`**: The primary workflow for extracting audio features (using `librosa` and `msaf`) and computing similarity metrics between songs.
+- **`decade_comparison.ipynb`**: Detailed comparative analysis and visualization of trends across different decades.
+- **`docs/`**: Contains the source for the project's [web dashboard](https://cbolson22.github.io/Top10SongSimilarity/), including interactive plots and findings.
+- **`MSD_test_files/`**: Old files and logic for matching Billboard chart data with a Million Song Dataset (MSD) subset.
+  - `merged.csv`: The resulting dataset of Billboard hits found within the MSD.
+  - `build_billboard_table.py` & `build_subset_table.py`: Scripts for data cleaning and integration.
+- **`decade_top_20/`**: Historical Billboard Hot 100 data (`charts.csv`) and processed rankings for analysis.
 
-### 7.
-## After reviewing billboard.py, decided to use kaggle dataset instead: https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs
-# Download as zip file and move "charts.csv" into your directory
+---
 
-### 8.
-## Cleaned artist and song data, and merged:
-# Remove punctuation, parenthesis
-# For artists: remove songs with multiple collaborators so it can match MSD (which only has one artist)
-# Merged and wrote to merged.csv
+## Getting Started
 
-### 9. 
-## Compute Weekly Averages:
-# Since we have a small dataset, most weeks only have 1 or 2 songs. The full counts are here:
-| # Songs in week| # Weeks |
-|---|-------|
-| 1 | 771   |
-| 2 | 492   |
-| 3 | 250   |
-| 4 | 199   |
-| 5 | 93    |
-| 6 | 77    |
-| 7 | 31    |
-| 8 | 10    |
-# For analysis we may want to only use weeks that have a certain amount of songs
-# Overall, only 271 unique songs from the charts are found in the MSD subset, so figure out alternate data sources if necessary 
+### 1. Environment Setup
+Ensure you have Python 3.10+ installed. It is recommended to use a virtual environment:
+
+```bash
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 2. Running the Analysis
+The project relies on Jupyter notebooks for the analysis pipeline:
+
+1. Open `analysis_pipeline_example.ipynb` to see how audio features are extracted from the `song_mp3/` directory (which you will need to populate with audio samples).
+2. Use `decade_comparison.ipynb` to generate the trend visualizations found in the `docs/plots/` folder.
+3. If you wish to rebuild the Million Song Dataset subset integration, navigate to `MSD_test_files/` and run the `build_*.py` scripts.
+
+---
+
+## Methodology Note
+This analysis uses a combination of the Billboard Hot 100 historical dataset (via Kaggle) and local MP3 samples downloaded from YouTube.
