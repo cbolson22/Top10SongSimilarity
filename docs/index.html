@@ -39,18 +39,14 @@ and how production techniques shape listener preferences.
 <p>
 At a high level, we analyzed the top twenty songs from each decade between the 1950s and 2010s using audio signal processing techniques.
 To find these top twenty songs we used the "Billboard Hot 100" historical dataset available on <a href="https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs">Kaggle</a>, and then downloaded local MP3 samples of each song from YouTube for analysis.
-We extracted low-level acoustic features such as tempo and energy (loudness) using Librosa. We also performed structural segmentation using
-<a href="https://github.com/urinieto/msaf">MSAF (Music Structure Analysis Framework)</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
-By aggregating these features by decade, we were able to compare long-term trends in popular music.
-</p>
-
-<p>
-To build and test our analysis, we constructed a dataset of canonical hit songs from each decade and processed the raw audio files directly.
 We used the following metric to get the "top 20" songs: # chart appearances × (101 - avg_rank). This rewarded songs with more weeks
 on the chart, as well as songs with average higher scores.
-
+We then extracted low-level acoustic features such as tempo and energy (loudness) using Librosa. We also performed structural segmentation using
+<a href="https://github.com/urinieto/msaf">MSAF (Music Structure Analysis Framework)</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
+By aggregating these features by decade, we were able to compare long-term trends in popular music. 
 Acoustic features were averaged per song and then averaged across decades. Structural complexity was measured using segmentation boundaries and entropy metrics.
 We evaluated trends by visualizing feature changes over time and examining whether shifts appeared linear, cyclical, or abrupt.
+
 </p>
 
 <p>
@@ -141,7 +137,7 @@ a high number means it's more complex.
 <div class="section">
 <h3>Segment Variability</h3>
 <p>
-After sectioning the song, to get label entropy, MSAF determines how evenly the song's sections are spread across different types of sections.
+After sectioning the song, to get label entropy, MSAF determines how evenly the song's different types/sections are spread across the length of the song.
 Low entropy means the song has a similar type across the whole runtime, and high entropy means there's much variability. Segment variability measures how evenly different structural sections are distributed within a song, indicating how repetitive or structurally diverse its overall form is.
 Segment variability declines steadily from the 1950s through the 2000s, suggesting that modern songs tend to
 rely more heavily on repeated section patterns. This indicates a gradual shift toward more predictable and repetitive song structures over time.
