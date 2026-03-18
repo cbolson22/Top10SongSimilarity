@@ -26,32 +26,71 @@ Bryan Pardo</p>
 <hr>
 
 <div class="section">
-<h2>*STILL TODO*</h2>
-<ul>
-    <li>Add paragraphs about overall project (why and how we did it)</li>
-    <li>Organize Website to make it easier to see all comparison plots</li>
-    <li>Find some research or findings online that agree with or contrast with our findings to add more context and depth to the analysis</li>
-    <li>Use the trends to predict which songs in the 2020s will be hits based on their features, and see if we can find any early data to support or go against those predictions</li>
-</ul>
-</div>
-
-<div class="section">
 <h2>Project Overview</h2>
 <p>
-This project analyzes how popular music has evolved across decades by examining
-both acoustic features and structural complexity of top songs from the 1950s to the 2010s.
-We extracted low-level audio features using Librosa and structural segmentation using <a href="https://github.com/urinieto/msaf">MSAF</a>.
-We then averaged features by decade to study long-term trends.
+Popular music constantly evolves, but it is often unclear how those changes manifest in measurable musical structure and sound.
+This project investigates how the acoustic and structural characteristics of top-charting songs have changed across decades.
+Understanding these shifts helps reveal whether modern hits are simply louder and more compressed, structurally simpler, or harmonically
+different from earlier eras. Beyond curiosity, this analysis connects to broader questions about cultural evolution, technological change,
+and how production techniques shape listener preferences.
 </p>
+
+<p>
+At a high level, we analyzed the top twenty songs from each decade between the 1950s and 2010s using audio signal processing techniques.
+We extracted low-level acoustic features such as tempo and energy (loudness) using Librosa. We also performed structural segmentation using
+<a href="https://github.com/urinieto/msaf">MSAF</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
+By aggregating these features by decade, we were able to compare long-term trends in popular music.
+</p>
+
+<p>
+To build and test our analysis, we constructed a dataset of canonical hit songs from each decade and processed the raw audio files directly.
+Acoustic features were averaged per song and then averaged across decades. Structural complexity was measured using segmentation boundaries and entropy metrics.
+We evaluated trends by visualizing feature changes over time and examining whether shifts appeared linear, cyclical, or abrupt.
+</p>
+
+<p>
+Our results suggest that while tempo fluctuates and harmonic content shows possible cyclical patterns, energy and loudness have increased significantly over time,
+particularly from the 1990s onward. Structural entropy appears to decrease in more recent decades, suggesting increased repetition and possibly more formulaic
+structure in modern hits. Overall, the findings indicate that popular music evolves gradually, with technological and production changes playing a major role in
+shaping its acoustic and structural profile.
+</p>
+
 </div>
+
+
+
+<div class="section">
+<h2>Analysis Pipeline Example</h2>
+<p>
+    This is an example walkthrough of one song ("Radioactive" by Imagine Dragons) showing the extraction of acoustic and structural features using Librosa and MSAF, and how the resulting DataFrame is structured for further analysis.
+</p>
+<img src="code_img/librosa_code.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="Librosa Feature Extraction Code">
+<img src="code_img/msaf_code.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="MSAF Structural Segmentation Code">
+<img src="code_img/make_df.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="DataFrame Construction Code">
+<img src="code_img/df_results.png" style="max-width: 90%; display: block;" alt="Resulting DataFrame">
+</div>
+
+
+<h2>
+Key Findings
+</h2>
 
 <div class="section">
 <h2>Average Tempo</h2>
 <p>
-Tempo increased from the 1950s to a peak in the 1980s, then stabilized in modern decades.
-This challenges the assumption that modern hits are simply faster.
+Average tempo rises from the 1950s through the 1980s, peaks around the 1990s, and then declines slightly in the 2000s and 2010s.
+This suggests that modern hits are not necessarily faster than songs from earlier peak decades.
 </p>
 <img src="plots/tempo_trend.png">
+</div>
+
+<div class="section">
+<h2>Average Duration</h2>
+<p>
+Song length expanded through the CD era, peaked in the 1990s, declined with the
+rise of streaming, and partially rebounded in the 2010s.
+</p>
+<img src="plots/duration_trend.png">
 </div>
 
 <div class="section">
@@ -75,49 +114,34 @@ This challenges the assumption that modern hits are simply faster.
 </div>
 
 <div class="section">
-<h2>Label Entropy</h2>
-<p>
-Using MSAF, we measured structural entropy across decades. 
-Results suggest modern songs may be slightly more structurally repetitive than earlier decades.
-</p>
-<img src="plots/label_entropy_trend.png">
-</div>
-
-<div class="section">
 <h2>Number of Segments</h2>
 <p>
-The number of segments per song has fluctuated over time, reflecting changes in 
-song structure and complexity as production techniques evolved.
+The number of structural segments per song increased from the 1950s through the 1980s, suggesting growing
+structural complexity during that period. In more recent decades, the number of segments slightly declines,
+indicating a modest simplification of song structure.
 </p>
 <img src="plots/num_segments_trend.png">
 </div>
 
 <div class="section">
-<h2>Structural Ratio</h2>
+<h2>Segment Variability</h2>
 <p>
-The ratio of structured sections to total segments shows how much of a song is 
-composed of repeating parts, highlighting trends in musical predictability.
+Segment variability measures how evenly different structural sections are distributed within a song, indicating how repetitive or structurally diverse its overall form is.
+Segment variability declines steadily from the 1950s through the 2000s, suggesting that modern songs tend to
+rely more heavily on repeated section patterns. This indicates a gradual shift toward more predictable and repetitive song structures over time.
 </p>
-<img src="plots/structure_ratio_trend.png">
+<img src="plots/label_entropy_trend.png">
 </div>
 
-<div class="section">
-<h2>Average Duration</h2>
-<p>
-Song length expanded through the CD era, peaked in the 1990s, declined with the
-rise of streaming, and partially rebounded in the 2010s.
-</p>
-<img src="plots/duration_trend.png">
-</div>
+<h2>
+Predicting 2020 Hits
+</h2>
 
 <div class="section">
-<h2>Average Chroma Mean</h2>
+<h2>TODO</h2>
 <p>
-Average chroma values reflect the harmonic intensity of popular music. The trend
-suggests a cyclical pattern over time, with tonal richness rising up to the 1980s,
-dipping in the 1990s, and increasing again in the 2000s and 2010s.
+TODO
 </p>
-<img src="plots/chroma_mean_trend.png">
 </div>
 
 
