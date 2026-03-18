@@ -75,6 +75,7 @@ Visit our code repository <a href="https://github.com/cbolson22/Top10SongSimilar
 </p>
 <img src="code_img/librosa_code.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="Librosa Feature Extraction Code">
 <img src="code_img/msaf_code.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="MSAF Structural Segmentation Code">
+<img src="code_img/loudness_code.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="Loudness Feature Extraction Code">
 <img src="code_img/make_df.png" style="max-width: 60%; display: block; margin-bottom: 10px;" alt="DataFrame Construction Code">
 <img src="code_img/df_results.png" style="max-width: 90%; display: block;" alt="Resulting DataFrame">
 </div>
@@ -144,6 +145,9 @@ After sectioning the song, to get label entropy, MSAF determines how evenly the 
 Low entropy means the song has a similar type across the whole runtime, and high entropy means there's much variability. Segment variability measures how evenly different structural sections are distributed within a song, indicating how repetitive or structurally diverse its overall form is.
 Segment variability declines steadily from the 1950s through the 2000s, suggesting that modern songs tend to
 rely more heavily on repeated section patterns. This indicates a gradual shift toward more predictable and repetitive song structures over time.
+A study published in Scientific Reports found that contemporary popular music exhibits increasing homogenization and reduced dynamic variability,
+indicating that, as our findings suggest, modern hits have become more acoustically similar over time
+<a href="https://www.nature.com/articles/srep00521" target="_blank">[2]</a>.
 </p>
 <img src="plots/label_entropy_trend.png">
 </div>
