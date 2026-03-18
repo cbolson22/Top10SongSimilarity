@@ -21,7 +21,8 @@
 <strong>Connor Olson - connorolson2026@u.northwestern.edu</strong><br>
 CS 352 – Machine Perception of Music & Audio<br>
 Northwestern University<br>
-Bryan Pardo</p>
+Professor: Bryan Pardo<br>
+Project Mentor: Annie Chu</p>
 
 <hr>
 
@@ -30,8 +31,8 @@ Bryan Pardo</p>
 <p>
 Popular music constantly evolves, but it is often unclear how those changes manifest in measurable musical structure and sound.
 This project investigates how the acoustic and structural characteristics of top-charting songs have changed across decades.
-Understanding these shifts helps reveal whether modern hits are simply louder and more compressed, structurally simpler, or harmonically
-different from earlier eras. Beyond curiosity, this analysis connects to broader questions about cultural evolution, technological change,
+Understanding these shifts helps reveal whether modern hits are simply louder and more compressed, or structurally simpler across
+different eras. Beyond curiosity, this analysis connects to broader questions about cultural evolution, technological change,
 and how production techniques shape listener preferences.
 </p>
 
@@ -39,18 +40,21 @@ and how production techniques shape listener preferences.
 At a high level, we analyzed the top twenty songs from each decade between the 1950s and 2010s using audio signal processing techniques.
 To find these top twenty songs we used the "Billboard Hot 100" historical dataset available on <a href="https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs">Kaggle</a>, and then downloaded local MP3 samples of each song from YouTube for analysis.
 We extracted low-level acoustic features such as tempo and energy (loudness) using Librosa. We also performed structural segmentation using
-<a href="https://github.com/urinieto/msaf">MSAF</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
+<a href="https://github.com/urinieto/msaf">MSAF (Music Structure Analysis Framework)</a> to measure properties such as number of structural sections, average segment length, repetition patterns, and structural entropy.
 By aggregating these features by decade, we were able to compare long-term trends in popular music.
 </p>
 
 <p>
 To build and test our analysis, we constructed a dataset of canonical hit songs from each decade and processed the raw audio files directly.
+We used the following metric to get the "top 20" songs: # chart appearances × (101 - avg_rank). This rewarded songs with more weeks
+on the chart, as well as songs with average higher scores.
+
 Acoustic features were averaged per song and then averaged across decades. Structural complexity was measured using segmentation boundaries and entropy metrics.
 We evaluated trends by visualizing feature changes over time and examining whether shifts appeared linear, cyclical, or abrupt.
 </p>
 
 <p>
-Our results suggest that while tempo fluctuates and harmonic content shows possible cyclical patterns, energy and loudness have increased significantly over time,
+Our results suggest that while tempo fluctuates, energy and loudness have increased significantly over time,
 particularly from the 1990s onward. Structural entropy appears to decrease in more recent decades, suggesting increased repetition and possibly more formulaic
 structure in modern hits. Overall, the findings indicate that popular music evolves gradually, with technological and production changes playing a major role in
 shaping its acoustic and structural profile.
@@ -105,7 +109,7 @@ rise of streaming, and partially rebounded in the 2010s.
     consistent with the “loudness war” phenomenon in modern production.
 
     Three complementary metrics capture the loudness war's fingerprint across decades. 
-    RMS measures raw loudness, LUFS uses RMS but weighs mid-range frequencies as louder than
+    RMS measures raw loudness, LUFS (Loudness Units Full Scale) uses RMS but weighs mid-range frequencies as louder than
     bass or treble to more accurately represent perceived loudness. Crest factor measures the ratio 
     between peak amplitude and RMS, which trends downward as a direct result of compression, a result
     of the loudness war. 
@@ -119,19 +123,25 @@ rise of streaming, and partially rebounded in the 2010s.
 </div>
 
 <div class="section">
-<h2>Number of Segments</h2>
+<h2>MSAF (Music Structure Analysis)</h2>
+<h3>Number of Segments</h3>
 <p>
 The number of structural segments per song increased from the 1950s through the 1980s, suggesting growing
 structural complexity during that period. In more recent decades, the number of segments slightly declines,
 indicating a modest simplification of song structure.
+
+The MSAF algorithm uses a similarity matrix to determine how similar certain sections of each song is to the rest of the songs,
+and the most different areas are the section boundaries. A low number of segments means the structure is more simple, and 
+a high number means it's more complex. 
 </p>
 <img src="plots/num_segments_trend.png">
 </div>
 
 <div class="section">
-<h2>Segment Variability</h2>
+<h3>Segment Variability</h3>
 <p>
-Segment variability measures how evenly different structural sections are distributed within a song, indicating how repetitive or structurally diverse its overall form is.
+After sectioning the song, to get label entropy, MSAF determines how evenly the song's sections are spread across different types of sections.
+Low entropy means the song has a similar type across the whole runtime, and high entropy means there's much variability. Segment variability measures how evenly different structural sections are distributed within a song, indicating how repetitive or structurally diverse its overall form is.
 Segment variability declines steadily from the 1950s through the 2000s, suggesting that modern songs tend to
 rely more heavily on repeated section patterns. This indicates a gradual shift toward more predictable and repetitive song structures over time.
 </p>
@@ -149,6 +159,9 @@ TODO
 </p>
 </div>
 
+
+<div class="section">
+<h2>Repository: <a href="https://github.com/cbolson22/Top10SongSimilarity">https://github.com/cbolson22/Top10SongSimilarity</a></h2></div>
 
 <div class="section">
 <h2>Audio Tracks Analyzed</h2>
@@ -329,6 +342,26 @@ TODO
         </ul>
     </div>
 </div>
+
+<div class="section">
+<h2>Appendix</h2>
+    <p>
+        Throughout the final project process we've changed our focus and goals slightly. Initially, we wanted to 
+        use the <a href="http://millionsongdataset.com/">Million Song Dataset</a> to analyze how quickly music on
+        the top charts changes over time, going week by week to analyze different changes.  We also planned on using
+        the <a href="https://pypi.org/project/billboard.py/">Billboard Python API</a> to fetch Billboard data, which is now
+        deprecated, leading us to pivot to Kaggle data. Upon downloading a 10,000 song subet from the MSD, we found that there 
+        was not enough overlap with the top Billboard songs for our original analysis goal. Because of these restrictions,
+        we pivoted to manually scraping audio files from YouTube and collecting our own raw data. We ended up having a
+        smaller sample set with more data for each, rather than a larger sample set with less data. Our preliminary analysis
+        using the MSD is available in our <a href="https://github.com/cbolson22/Top10SongSimilarity/tree/main/MSD_test_files">
+        MSD_test_files folder of our repository</a> for those interested. 
+
+        In the future, it would be interesting to use data from the entire MSD if there is larger overlap in the full
+        set than the subset.
+    </p>
+</div>
+
 </div>
 
 </body>
