@@ -9,9 +9,9 @@ This project investigates the evolution of popular music by analyzing the simila
 
 ## Repository Contents
 
-- **`analysis_pipeline_example.ipynb`**: The primary workflow for extracting audio features (using `librosa` and `msaf`) and computing similarity metrics between songs.
+- **`analysis_pipeline_example.ipynb`**: An example workflow for extracting audio features (using `librosa` and `msaf`) with the example song "Radioactive" by Imagine Dragons.
 - **`decade_comparison.ipynb`**: Detailed comparative analysis and visualization of trends across different decades.
-- **`docs/`**: Contains the source for the project's [web dashboard](https://cbolson22.github.io/Top10SongSimilarity/), including interactive plots and findings.
+- **`docs/`**: Contains the source for the project's [web dashboard](https://cbolson22.github.io/Top10SongSimilarity/), plot images, code chunk images, and the links to YouTube videos of the analyzed songs.
 - **`MSD_test_files/`**: Old files and logic for matching Billboard chart data with a Million Song Dataset (MSD) subset.
   - `merged.csv`: The resulting dataset of Billboard hits found within the MSD.
   - `build_billboard_table.py` & `build_subset_table.py`: Scripts for data cleaning and integration.
@@ -46,6 +46,7 @@ The project relies on Jupyter notebooks for the analysis pipeline:
 
 ## Methodology Note
 This analysis uses a combination of the Billboard Hot 100 historical dataset (via [Kaggle](https://www.kaggle.com/datasets/dhruvildave/billboard-the-hot-100-songs)) and local MP3 samples downloaded from YouTube.
+To analyze these songs, we used `librosa` for audio feature extraction and [`msaf`](https://github.com/urinieto/msaf) for structural segmentation.
 
 ## Contact Us!
 Annabelle Sole - annabellesole2026@u.northwestern.edu
